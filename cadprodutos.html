@@ -1,0 +1,807 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Vendedor | GLEICE KELY ARTESANATOS</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            background: linear-gradient(135deg, #d8eff9, #fce8f0);
+            color: #443744;
+        }
+
+        .container { max-width: 850px; margin: 25px auto; }
+
+        .topo {
+            text-align: center;
+            background: #fff;
+            padding: 28px 15px;
+            border-radius: 22px;
+            box-shadow: 0 5px 20px #00000012;
+            margin-bottom: 22px;
+        }
+
+        .topo h1 { color: #a85f83; margin: 0; font-size: 28px; }
+        .topo p { color: #866b7c; margin-bottom: 0; }
+
+        .painel {
+            background: white;
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px #00000012;
+            margin-bottom: 22px;
+        }
+
+        h2 { color: #a85f83; margin-top: 0; }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 15px 0 7px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #e3cbd8;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            font-family: inherit;
+            background: white;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #a85f83;
+        }
+
+        textarea { min-height: 100px; resize: vertical; }
+
+        input[type="file"] {
+            background: #fff8fb;
+            cursor: pointer;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 13px 20px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.2s;
+        }
+
+        button:hover { opacity: 0.88; transform: translateY(-1px); }
+        button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .principal { background: #a85f83; color: white; width: 100%; }
+        .secundario { background: #e7edf1; color: #554754; }
+        .perigo { background: #c94d5c; color: white; }
+        .verde { background: #248b70; color: white; }
+
+        .alternar {
+            color: #a85f83;
+            background: transparent;
+            padding: 5px;
+        }
+
+        .voltar-loja {
+            display: inline-block;
+            background: #248b70;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            margin-top: 18px;
+            font-weight: bold;
+        }
+
+        .voltar-loja:hover { opacity: 0.88; }
+
+        .mensagem {
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+            line-height: 1.5;
+        }
+
+        .erro { display: block; color: #922d3a; background: #ffe5e8; }
+        .sucesso { display: block; color: #176343; background: #e0f6e9; }
+        .escondido { display: none !important; }
+
+        .produto {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            border: 1px solid #eedde6;
+            padding: 15px;
+            border-radius: 14px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .produto img {
+            width: 110px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 12px;
+            background: #f5edf1;
+        }
+
+        .produto-info { flex: 1; min-width: 180px; }
+        .produto-info h3 { margin: 0 0 7px; color: #a85f83; }
+        .produto-info p { margin: 5px 0; overflow-wrap: anywhere; }
+
+        .categoria-etiqueta {
+            display: inline-block;
+            background: #fce8f0;
+            color: #a85f83;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .acoes { display: flex; gap: 8px; flex-wrap: wrap; }
+        .acoes button { margin-top: 8px; }
+
+        .previsualizacao { display: none; margin-top: 15px; }
+
+        .previsualizacao img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 2px solid #eedde6;
+        }
+
+        .rodape { text-align: center; color: #806b79; padding: 15px; }
+
+        @media (max-width: 550px) {
+            body { padding: 10px; }
+            .painel { padding: 20px; }
+            .produto { align-items: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header class="topo">
+        <h1>GLEICE KELY ARTESANATOS</h1>
+        <p>Área do vendedor — Sua criatividade merece ser vista!</p>
+
+        <a class="voltar-loja" href="index.html">
+            🏠 Voltar para a loja
+        </a>
+    </header>
+
+    <section class="painel" id="painelLogin">
+
+        <div id="formLogin">
+            <h2>Bem-vindo à área do vendedor!</h2>
+            <p>Entre na sua conta para cadastrar e administrar seus produtos.</p>
+
+            <form id="loginForm">
+                <label for="loginEmail">E-mail</label>
+                <input type="email" id="loginEmail" required placeholder="Digite seu e-mail">
+
+                <label for="loginSenha">Senha</label>
+                <input type="password" id="loginSenha" required placeholder="Digite sua senha">
+
+                <button class="principal" type="submit">Entrar na minha conta</button>
+            </form>
+
+            <p>Ainda não tem uma conta?</p>
+            <button class="alternar" id="mostrarCadastro">Criar minha conta</button>
+        </div>
+
+        <div id="formCadastro" class="escondido">
+            <h2>Crie sua conta</h2>
+            <p>Faça seu cadastro para começar a anunciar seus produtos.</p>
+
+            <form id="cadastroForm">
+                <label for="cadastroNome">Seu nome</label>
+                <input type="text" id="cadastroNome" required placeholder="Digite seu nome">
+
+                <label for="cadastroEmail">E-mail</label>
+                <input type="email" id="cadastroEmail" required placeholder="Digite seu e-mail">
+
+                <label for="cadastroSenha">Crie uma senha</label>
+                <input type="password" id="cadastroSenha" required minlength="6"
+                    placeholder="Mínimo de 6 caracteres">
+
+                <button class="principal" type="submit">Criar minha conta</button>
+            </form>
+
+            <p>Já possui uma conta?</p>
+            <button class="alternar" id="mostrarLogin">Voltar para o login</button>
+        </div>
+
+        <div id="mensagemLogin" class="mensagem"></div>
+    </section>
+
+    <section id="areaVendedor" class="escondido">
+
+        <div class="painel">
+            <h2>Olá, <span id="nomeVendedor">vendedor(a)</span>! 💕</h2>
+            <p>Agora você pode cadastrar seus produtos na loja.</p>
+            <button class="secundario" id="sairConta">Sair da minha conta</button>
+        </div>
+
+        <div class="painel">
+            <h2 id="tituloFormulario">Cadastrar novo produto</h2>
+
+            <form id="produtoForm">
+
+                <label for="produtoNome">Nome do produto</label>
+                <input type="text" id="produtoNome" required placeholder="Ex.: Bolsa de crochê">
+
+                <label for="produtoDescricao">Descrição</label>
+                <textarea id="produtoDescricao" required
+                    placeholder="Conte um pouco sobre seu produto"></textarea>
+
+                <label for="produtoPreco">Preço (R$)</label>
+                <input type="number" id="produtoPreco" required min="0.01" step="0.01"
+                    placeholder="Ex.: 35,00">
+
+                <label for="produtoCategoria">Categoria do produto</label>
+                <select id="produtoCategoria" required>
+                    <option value="">Escolha uma categoria</option>
+                    <option value="croche">Crochê</option>
+                    <option value="bordado">Bordado</option>
+                    <option value="papelaria">Papelaria</option>
+                </select>
+
+                <p style="font-size:13px;color:#806b79">
+                    Escolha a categoria correta para seu produto aparecer na seção correspondente da loja.
+                </p>
+
+                <label for="produtoImagem">Escolha a foto do seu computador</label>
+                <input type="file" id="produtoImagem" accept="image/*">
+
+                <p style="font-size:13px;color:#806b79">
+                    Escolha uma foto salva no seu computador.
+                    Ela será enviada automaticamente para guardar na sua loja.
+                </p>
+
+                <div class="previsualizacao" id="previsualizacao">
+                    <p><strong>Prévia da foto escolhida:</strong></p>
+                    <img id="fotoPreview" alt="Prévia da foto do produto">
+                </div>
+
+                <div id="mensagemUpload" class="mensagem"></div>
+
+                <button class="principal" type="submit" id="salvarProduto">
+                    Publicar produto
+                </button>
+
+                <button class="secundario escondido" type="button" id="cancelarEdicao">
+                    Cancelar edição
+                </button>
+            </form>
+
+            <div id="mensagemProduto" class="mensagem"></div>
+        </div>
+
+        <div class="painel">
+            <h2>Meus produtos</h2>
+            <p>Aqui aparecem os produtos cadastrados por você.</p>
+            <div id="listaProdutos">Carregando produtos...</div>
+        </div>
+
+    </section>
+
+    <footer class="rodape">
+        <p>GLEICE KELY ARTESANATOS</p>
+        <p>Artesanato feito com amor! ❤️</p>
+
+        <button class="secundario" type="button"
+            onclick="window.location.href='index.html'">
+            Voltar para a loja
+        </button>
+    </footer>
+
+</div>
+
+<script type="module">
+
+    import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+
+    import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut,
+        onAuthStateChanged,
+        updateProfile
+    } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+
+    import {
+        getFirestore,
+        collection,
+        addDoc,
+        getDocs,
+        query,
+        where,
+        updateDoc,
+        deleteDoc,
+        doc,
+        serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCg7n-ni-XpKqdU6mPoPQ-fPnk2jDh33sQ",
+        authDomain: "lojavirtualgkartesanato.firebaseapp.com",
+        projectId: "lojavirtualgkartesanato",
+        storageBucket: "lojavirtualgkartesanato.firebasestorage.app",
+        messagingSenderId: "608028677840",
+        appId: "1:608028677840:web:6f7d1abb179af8a80530d5",
+        measurementId: "G-QQMGXFVWH7"
+    };
+
+    const CLOUDINARY_CLOUD_NAME = "rgzlvkuj";
+    const CLOUDINARY_UPLOAD_PRESET = "gk_artesanato_upload";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let usuarioAtual = null;
+    let produtoEmEdicao = null;
+    let imagemAtual = "";
+
+    const painelLogin = document.getElementById("painelLogin");
+    const areaVendedor = document.getElementById("areaVendedor");
+    const formLogin = document.getElementById("formLogin");
+    const formCadastro = document.getElementById("formCadastro");
+    const mensagemLogin = document.getElementById("mensagemLogin");
+    const mensagemProduto = document.getElementById("mensagemProduto");
+    const mensagemUpload = document.getElementById("mensagemUpload");
+    const listaProdutos = document.getElementById("listaProdutos");
+
+    const campoImagem = document.getElementById("produtoImagem");
+    const previsualizacao = document.getElementById("previsualizacao");
+    const fotoPreview = document.getElementById("fotoPreview");
+
+    function mostrarMensagem(elemento, texto, tipo) {
+        elemento.textContent = texto;
+        elemento.className = "mensagem " + tipo;
+    }
+
+    function limparMensagem(elemento) {
+        elemento.textContent = "";
+        elemento.className = "mensagem";
+    }
+
+    function traduzirErro(erro) {
+        const codigo = erro.code || "";
+
+        const erros = {
+            "auth/email-already-in-use": "Este e-mail já está cadastrado.",
+            "auth/invalid-email": "Digite um e-mail válido.",
+            "auth/weak-password": "A senha precisa ter pelo menos 6 caracteres.",
+            "auth/invalid-credential": "E-mail ou senha incorretos.",
+            "auth/user-not-found": "Não encontramos uma conta com esse e-mail.",
+            "auth/wrong-password": "Senha incorreta.",
+            "auth/too-many-requests": "Muitas tentativas. Aguarde um pouco e tente novamente.",
+            "permission-denied": "O Firebase não permitiu esta operação. Confira as regras do banco de dados.",
+            "unavailable": "Não foi possível conectar ao banco de dados. Tente novamente."
+        };
+
+        return erros[codigo] || "Ocorreu um erro: " + (erro.message || "tente novamente.");
+    }
+
+    function nomeCategoria(categoria) {
+        const categorias = {
+            croche: "Crochê",
+            bordado: "Bordado",
+            papelaria: "Papelaria"
+        };
+
+        return categorias[categoria] || "Sem categoria";
+    }
+
+    campoImagem.addEventListener("change", () => {
+        limparMensagem(mensagemUpload);
+
+        const arquivo = campoImagem.files[0];
+
+        if (!arquivo) {
+            previsualizacao.style.display = "none";
+            return;
+        }
+
+        if (!arquivo.type.startsWith("image/")) {
+            campoImagem.value = "";
+            previsualizacao.style.display = "none";
+            mostrarMensagem(mensagemUpload, "Escolha um arquivo de imagem.", "erro");
+            return;
+        }
+
+        const leitor = new FileReader();
+
+        leitor.onload = (evento) => {
+            fotoPreview.src = evento.target.result;
+            previsualizacao.style.display = "block";
+        };
+
+        leitor.onerror = () => {
+            mostrarMensagem(mensagemUpload, "Não foi possível abrir essa imagem.", "erro");
+        };
+
+        leitor.readAsDataURL(arquivo);
+    });
+
+    async function enviarFotoCloudinary(arquivo) {
+        const endereco =
+            `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
+
+        const dados = new FormData();
+        dados.append("file", arquivo);
+        dados.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+
+        const resposta = await fetch(endereco, {
+            method: "POST",
+            body: dados
+        });
+
+        const resultado = await resposta.json();
+
+        if (!resposta.ok) {
+            throw new Error(
+                resultado.error?.message ||
+                "Não foi possível enviar a foto. Confira a configuração do Cloudinary."
+            );
+        }
+
+        if (!resultado.secure_url) {
+            throw new Error("O Cloudinary não retornou o endereço da foto.");
+        }
+
+        return resultado.secure_url;
+    }
+
+    document.getElementById("mostrarCadastro").addEventListener("click", () => {
+        formLogin.classList.add("escondido");
+        formCadastro.classList.remove("escondido");
+        limparMensagem(mensagemLogin);
+    });
+
+    document.getElementById("mostrarLogin").addEventListener("click", () => {
+        formCadastro.classList.add("escondido");
+        formLogin.classList.remove("escondido");
+        limparMensagem(mensagemLogin);
+    });
+
+    document.getElementById("cadastroForm").addEventListener("submit", async (evento) => {
+        evento.preventDefault();
+
+        const nome = document.getElementById("cadastroNome").value.trim();
+        const email = document.getElementById("cadastroEmail").value.trim();
+        const senha = document.getElementById("cadastroSenha").value;
+
+        try {
+            const resultado = await createUserWithEmailAndPassword(auth, email, senha);
+
+            await updateProfile(resultado.user, { displayName: nome });
+
+            mostrarMensagem(mensagemLogin, "Conta criada com sucesso! Bem-vindo(a)!", "sucesso");
+            evento.target.reset();
+
+        } catch (erro) {
+            mostrarMensagem(mensagemLogin, traduzirErro(erro), "erro");
+        }
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", async (evento) => {
+        evento.preventDefault();
+
+        const email = document.getElementById("loginEmail").value.trim();
+        const senha = document.getElementById("loginSenha").value;
+
+        try {
+            await signInWithEmailAndPassword(auth, email, senha);
+            limparMensagem(mensagemLogin);
+
+        } catch (erro) {
+            mostrarMensagem(mensagemLogin, traduzirErro(erro), "erro");
+        }
+    });
+
+    onAuthStateChanged(auth, async (usuario) => {
+        usuarioAtual = usuario;
+
+        if (usuario) {
+            painelLogin.classList.add("escondido");
+            areaVendedor.classList.remove("escondido");
+
+            document.getElementById("nomeVendedor").textContent =
+                usuario.displayName || usuario.email;
+
+            await carregarProdutos();
+
+        } else {
+            painelLogin.classList.remove("escondido");
+            areaVendedor.classList.add("escondido");
+            listaProdutos.textContent = "";
+        }
+    });
+
+    document.getElementById("sairConta").addEventListener("click", async () => {
+        await signOut(auth);
+    });
+
+    document.getElementById("produtoForm").addEventListener("submit", async (evento) => {
+        evento.preventDefault();
+
+        if (!usuarioAtual) {
+            mostrarMensagem(mensagemProduto, "Entre na sua conta primeiro.", "erro");
+            return;
+        }
+
+        const nome = document.getElementById("produtoNome").value.trim();
+        const descricao = document.getElementById("produtoDescricao").value.trim();
+        const preco = Number(document.getElementById("produtoPreco").value);
+        const categoria = document.getElementById("produtoCategoria").value;
+        const arquivo = campoImagem.files[0];
+
+        if (!nome || !descricao || !categoria ||
+            !Number.isFinite(preco) || preco <= 0) {
+            mostrarMensagem(mensagemProduto, "Preencha os campos corretamente.", "erro");
+            return;
+        }
+
+        if (arquivo && !arquivo.type.startsWith("image/")) {
+            mostrarMensagem(mensagemProduto, "Escolha um arquivo de imagem válido.", "erro");
+            return;
+        }
+
+        const botao = document.getElementById("salvarProduto");
+        botao.disabled = true;
+
+        try {
+            let imagem = imagemAtual;
+
+            if (arquivo) {
+                botao.textContent = "Enviando foto...";
+
+                mostrarMensagem(
+                    mensagemUpload,
+                    "Aguarde! Estamos enviando sua foto...",
+                    "sucesso"
+                );
+
+                imagem = await enviarFotoCloudinary(arquivo);
+            }
+
+            botao.textContent = "Salvando produto...";
+
+            const dadosProduto = {
+                nome,
+                descricao,
+                preco,
+                categoria,
+                imagem,
+                usuarioId: usuarioAtual.uid,
+                vendedor: usuarioAtual.displayName || usuarioAtual.email
+            };
+
+            if (produtoEmEdicao) {
+                await updateDoc(doc(db, "produtos", produtoEmEdicao), dadosProduto);
+
+                mostrarMensagem(
+                    mensagemProduto,
+                    "Produto atualizado com sucesso!",
+                    "sucesso"
+                );
+
+            } else {
+                dadosProduto.criadoEm = serverTimestamp();
+
+                await addDoc(collection(db, "produtos"), dadosProduto);
+
+                mostrarMensagem(
+                    mensagemProduto,
+                    "Produto cadastrado com sucesso!",
+                    "sucesso"
+                );
+            }
+
+            cancelarEdicao();
+            limparMensagem(mensagemUpload);
+
+            await carregarProdutos();
+
+        } catch (erro) {
+            mostrarMensagem(
+                mensagemProduto,
+                "Não foi possível salvar o produto: " +
+                (erro.message || traduzirErro(erro)),
+                "erro"
+            );
+
+        } finally {
+            botao.disabled = false;
+            botao.textContent = produtoEmEdicao
+                ? "Salvar alterações"
+                : "Publicar produto";
+        }
+    });
+
+    async function carregarProdutos() {
+        listaProdutos.textContent = "Carregando produtos...";
+
+        try {
+            const consulta = query(
+                collection(db, "produtos"),
+                where("usuarioId", "==", usuarioAtual.uid)
+            );
+
+            const resultado = await getDocs(consulta);
+            listaProdutos.replaceChildren();
+
+            if (resultado.empty) {
+                listaProdutos.textContent = "Você ainda não cadastrou nenhum produto.";
+                return;
+            }
+
+            resultado.forEach((documento) => {
+                const produto = documento.data();
+                const id = documento.id;
+
+                const card = document.createElement("div");
+                card.className = "produto";
+
+                const foto = document.createElement("img");
+                foto.alt = produto.nome || "Foto do produto";
+
+                if (produto.imagem) {
+                    foto.src = produto.imagem;
+                } else {
+                    foto.alt = "Produto sem foto";
+                }
+
+                foto.onerror = () => {
+                    foto.removeAttribute("src");
+                    foto.alt = "Imagem não disponível";
+                };
+
+                const informacoes = document.createElement("div");
+                informacoes.className = "produto-info";
+
+                const titulo = document.createElement("h3");
+                titulo.textContent = produto.nome || "Produto sem nome";
+
+                const descricao = document.createElement("p");
+                descricao.textContent = produto.descricao || "";
+
+                const preco = document.createElement("p");
+                preco.textContent = Number(produto.preco || 0).toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL"
+                });
+
+                const etiqueta = document.createElement("span");
+                etiqueta.className = "categoria-etiqueta";
+                etiqueta.textContent = nomeCategoria(produto.categoria);
+
+                informacoes.append(titulo, descricao, preco, etiqueta);
+
+                const acoes = document.createElement("div");
+                acoes.className = "acoes";
+
+                const editar = document.createElement("button");
+                editar.className = "secundario";
+                editar.textContent = "Editar";
+                editar.addEventListener("click", () => editarProduto(id, produto));
+
+                const excluir = document.createElement("button");
+                excluir.className = "perigo";
+                excluir.textContent = "Excluir";
+                excluir.addEventListener("click", () => excluirProduto(id));
+
+                acoes.append(editar, excluir);
+                card.append(foto, informacoes, acoes);
+                listaProdutos.appendChild(card);
+            });
+
+        } catch (erro) {
+            listaProdutos.textContent = traduzirErro(erro);
+        }
+    }
+
+    function editarProduto(id, produto) {
+        produtoEmEdicao = id;
+        imagemAtual = produto.imagem || "";
+
+        document.getElementById("produtoNome").value = produto.nome || "";
+        document.getElementById("produtoDescricao").value = produto.descricao || "";
+        document.getElementById("produtoPreco").value = produto.preco || "";
+        document.getElementById("produtoCategoria").value = produto.categoria || "";
+
+        campoImagem.value = "";
+
+        if (imagemAtual) {
+            fotoPreview.src = imagemAtual;
+            previsualizacao.style.display = "block";
+        } else {
+            previsualizacao.style.display = "none";
+        }
+
+        document.getElementById("tituloFormulario").textContent = "Editar produto";
+        document.getElementById("salvarProduto").textContent = "Salvar alterações";
+        document.getElementById("cancelarEdicao").classList.remove("escondido");
+
+        limparMensagem(mensagemProduto);
+        limparMensagem(mensagemUpload);
+
+        document.getElementById("tituloFormulario").scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+
+    function cancelarEdicao() {
+        produtoEmEdicao = null;
+        imagemAtual = "";
+
+        document.getElementById("produtoForm").reset();
+
+        previsualizacao.style.display = "none";
+        fotoPreview.removeAttribute("src");
+
+        document.getElementById("tituloFormulario").textContent =
+            "Cadastrar novo produto";
+
+        document.getElementById("salvarProduto").textContent =
+            "Publicar produto";
+
+        document.getElementById("cancelarEdicao").classList.add("escondido");
+    }
+
+    document.getElementById("cancelarEdicao").addEventListener("click", cancelarEdicao);
+
+    async function excluirProduto(id) {
+        const confirmar = confirm("Tem certeza de que deseja excluir este produto?");
+
+        if (!confirmar) return;
+
+        try {
+            await deleteDoc(doc(db, "produtos", id));
+
+            mostrarMensagem(
+                mensagemProduto,
+                "Produto excluído com sucesso!",
+                "sucesso"
+            );
+
+            if (produtoEmEdicao === id) {
+                cancelarEdicao();
+            }
+
+            await carregarProdutos();
+
+        } catch (erro) {
+            mostrarMensagem(mensagemProduto, traduzirErro(erro), "erro");
+        }
+    }
+
+</script>
+
+</body>
+</html>

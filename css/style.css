@@ -1,0 +1,774 @@
+
+/* ==========================================
+   GK ARTESANATOS
+   ESTILO GERAL
+========================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Trebuchet MS", sans-serif;
+    background: linear-gradient(135deg, #dff2ff, #fce8f3);
+    color: #222;
+    margin: 0;
+    line-height: 1.5;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+/* ==========================================
+   CABEÇALHO COM IMAGEM ARTESANAL
+========================================== */
+
+header {
+    position: relative;
+    min-height: 340px;
+    padding: 35px 20px;
+    text-align: center;
+
+    background-image:
+        linear-gradient(
+            rgba(180, 220, 245, 0.12),
+            rgba(180, 220, 245, 0.12)
+        ),
+        url("../imagens/fundo-cabecalho-gk-artesanatos.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo-loja {
+    background: rgba(255, 245, 250, 0.91);
+    border: 3px dashed #c44ce9;
+    border-radius: 35px;
+    padding: 20px 35px;
+    max-width: 650px;
+    box-shadow: 0 5px 15px rgba(80, 30, 80, 0.18);
+}
+
+header h1 {
+    font-family: Georgia, serif;
+    font-size: 38px;
+    color: #67145d;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+header p {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 23px;
+    color: #5c174f;
+    margin: 8px 0 0;
+}
+
+
+/* ==========================================
+   ÍCONE DO CARRINHO E DARK MODE
+========================================== */
+
+.topo {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+
+    margin-top: 0;
+}
+
+#btnCarrinho {
+    position: relative;
+    background: linear-gradient(135deg, #ffffff, #fce8f3);
+    color: #75459b;
+    border: 2px solid #e9b8d8;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    padding: 5px;
+    font-size: 25px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+#quantidadeCarrinho {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    background: #e92e68;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    min-width: 23px;
+    height: 23px;
+    padding: 1px 5px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#btnDark {
+    background: linear-gradient(135deg, #8539b8, #4b1688);
+    border-radius: 25px;
+    padding: 12px 18px;
+    white-space: nowrap;
+}
+
+
+/* ==========================================
+   JANELA DO CARRINHO
+========================================== */
+
+.janela-carrinho {
+    display: none;
+    position: fixed;
+    top: 85px;
+    right: 20px;
+
+    width: 340px;
+    max-width: calc(100% - 30px);
+    max-height: 75vh;
+
+    overflow-y: auto;
+
+    padding: 18px;
+    border-radius: 18px;
+
+    background: #ffffff;
+    color: #333;
+
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+
+    z-index: 2000;
+}
+
+.janela-carrinho.aberto {
+    display: block;
+}
+
+.carrinho-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid #eadced;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+}
+
+.carrinho-cabecalho h2 {
+    color: #75459b;
+    font-size: 20px;
+    margin: 0;
+}
+
+#fecharCarrinho {
+    background: #c75d88;
+    padding: 7px 11px;
+    font-size: 14px;
+}
+
+#listaCarrinho {
+    max-height: 230px;
+    overflow-y: auto;
+    padding: 5px 0;
+}
+
+.item-carrinho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 2px;
+    border-bottom: 1px solid #eadced;
+
+    font-size: 13px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.item-carrinho span:first-child {
+    flex: 1;
+}
+
+.item-carrinho span:last-child {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.carrinho-vazio {
+    text-align: center;
+    font-size: 13px;
+    color: #777;
+    padding: 15px 5px;
+}
+
+.carrinho-total {
+    margin-top: 12px;
+    padding: 12px 0;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #237b50;
+
+    border-top: 1px solid #eadced;
+}
+
+.janela-carrinho #btnRetirar {
+    width: 100%;
+    margin-top: 10px;
+    background: #c75d88;
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   BOTÕES GERAIS
+========================================== */
+
+button {
+    font-family: "Trebuchet MS", sans-serif;
+    background: linear-gradient(135deg, #f02d42, #d71932);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    filter: brightness(0.92);
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* ==========================================
+   PRODUTOS
+========================================== */
+
+main {
+    padding: 20px;
+    text-align: center;
+    min-height: 400px;
+}
+
+.titulo-produtos {
+    font-family: Georgia, serif;
+    font-size: 38px;
+    color: #351276;
+    margin: 5px 0 20px;
+}
+
+.vitrine {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.produto {
+    background: white;
+    color: #222;
+    width: 290px;
+    padding: 15px;
+    border: 2px solid #d9c6f1;
+    border-radius: 18px;
+    box-shadow: 0 4px 10px rgba(80, 40, 100, 0.15);
+    transition: 0.3s;
+}
+
+.produto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(80, 40, 100, 0.2);
+}
+
+.produto img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.produto h3 {
+    font-family: Georgia, serif;
+    color: #251078;
+    font-size: 19px;
+}
+
+.produto p {
+    font-size: 15px;
+}
+
+.preco {
+    color: #176126;
+    font-size: 26px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.produto .comprar {
+    width: 90%;
+    font-size: 18px;
+    padding: 13px;
+}
+
+
+/* ==========================================
+   RECONHECIMENTO DE IMAGENS
+========================================== */
+
+#reconhecimento {
+    background-color: white;
+    color: #222;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px #ccc;
+}
+
+#reconhecimento h2 {
+    font-family: Georgia, serif;
+    color: darkblue;
+}
+
+#reconhecimento p {
+    line-height: 1.5;
+}
+
+#reconhecimento button {
+    background-color: #259cd3;
+    margin: 15px;
+}
+
+#reconhecimento button:hover {
+    background-color: #1475a3;
+}
+
+#webcam-container {
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+}
+
+#webcam-container canvas {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+#label-container {
+    margin-top: 15px;
+    font-weight: bold;
+    line-height: 1.8;
+}
+
+#label-container p {
+    background-color: #e8f5e9;
+    color: #222;
+    padding: 10px;
+    margin: 8px auto;
+    border-radius: 8px;
+}
+
+
+/* ==========================================
+   RODAPÉ
+========================================== */
+
+footer {
+    background: linear-gradient(135deg, #24106d, #53118d);
+    color: white;
+    text-align: center;
+    padding: 22px;
+    margin-top: 30px;
+    border-top: 5px dashed #f4c8ec;
+}
+
+footer p {
+    font-family: Georgia, serif;
+    font-size: 17px;
+}
+
+
+/* ==========================================
+   BOTÃO DO ROBÔ ASSISTENTE
+========================================== */
+
+#btn-Abrir-Chat {
+    font-family: "Trebuchet MS", sans-serif;
+    background: linear-gradient(135deg, #20d8c5, #009f9b);
+    color: white;
+    border: 3px solid #a1fff2;
+    padding: 15px 20px;
+    border-radius: 35px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+#btn-Abrir-Chat:hover {
+    background: #128C7E;
+}
+
+
+/* ==========================================
+   JANELA DO CHAT
+========================================== */
+
+#chat-container {
+    position: fixed;
+    bottom: 85px;
+    right: 20px;
+
+    width: 320px;
+    max-width: calc(100% - 40px);
+    max-height: 440px;
+
+    background-color: white;
+    color: #222;
+
+    border: 2px solid #20b9d0;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+    flex-direction: column;
+    overflow: hidden;
+
+    z-index: 999;
+}
+
+.chat-topo {
+    background: linear-gradient(135deg, #11b9d8, #008cae);
+    color: white;
+    padding: 15px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.chat-topo button {
+    background: transparent;
+    color: white;
+    padding: 5px 10px;
+}
+
+.chat-mensagem {
+    padding: 15px;
+    line-height: 1.5;
+
+    min-height: 100px;
+    max-height: 230px;
+
+    overflow-y: auto;
+    overflow-wrap: break-word;
+}
+
+.chat-mensagem p {
+    background: #f3e7f8;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.finalizar-chat {
+    padding: 8px 12px;
+}
+
+.finalizar-chat button {
+    width: 100%;
+    background: linear-gradient(135deg, #16c6a5, #079a91);
+}
+
+.chat-entrada {
+    display: flex;
+    gap: 5px;
+    padding: 10px;
+    align-items: center;
+}
+
+.chat-entrada input {
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+.chat-entrada button {
+    background: #079fc5;
+    padding: 10px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.botao-imagem {
+    display: inline-block;
+    background-color: #25b9ca;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+body.dark {
+    background: #121212;
+    color: white;
+}
+
+.dark header {
+    background-color: #173653;
+}
+
+.dark .titulo-loja {
+    background: rgba(35, 25, 50, 0.94);
+}
+
+.dark header h1,
+.dark header p {
+    color: #c699d1;
+}
+
+.dark main {
+    background: #121212;
+    color: white;
+}
+
+.dark .titulo-produtos {
+    color: #d7aaff;
+}
+
+.dark .produto {
+    background: #252525;
+    color: white;
+    border-color: #62477a;
+}
+
+.dark .produto h3 {
+    color: #d7aaff;
+}
+
+.dark .preco {
+    color: #7CFC00;
+}
+
+.dark .carrinho-vazio {
+    color: #ddd;
+}
+
+.dark .item-carrinho {
+    color: white;
+}
+
+.dark .janela-carrinho {
+    background: #292536;
+    color: white;
+}
+
+.dark .carrinho-cabecalho {
+    border-color: #514064;
+}
+
+.dark .carrinho-cabecalho h2 {
+    color: #b89aeb;
+}
+
+.dark .item-carrinho {
+    border-color: #514064;
+}
+
+.dark .carrinho-total {
+    color: #8df0a8;
+}
+
+.dark .carrinho-total {
+    border-color: #514064;
+}
+
+.dark #reconhecimento {
+    background: #252525;
+    color: white;
+}
+
+.dark #reconhecimento h2 {
+    color: #80bfff;
+}
+
+.dark #label-container p {
+    background: #333;
+    color: white;
+}
+
+.dark footer {
+    background: #080808;
+}
+
+.dark #chat-container {
+    background: #252525;
+    color: white;
+}
+
+.dark .chat-mensagem p {
+    background: #393044;
+    color: white;
+}
+
+.dark .chat-entrada input {
+    background: #333;
+    color: white;
+    border-color: #666;
+}
+
+.dark .chat-entrada input::placeholder {
+    color: #ccc;
+}
+
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 850px) {
+
+    header {
+        min-height: 390px;
+        padding-top: 125px;
+    }
+
+    .topo {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    header p {
+        font-size: 19px;
+    }
+
+    .titulo-loja {
+        padding: 15px;
+    }
+
+    .produto {
+        width: 280px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    header {
+        min-height: 420px;
+        padding: 150px 12px 25px;
+    }
+
+    .topo {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    #btnDark {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    #btnCarrinho {
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+    }
+
+    .janela-carrinho {
+        top: 75px;
+        right: 10px;
+        width: 320px;
+        max-width: calc(100% - 20px);
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+
+    header p {
+        font-size: 17px;
+    }
+
+    .titulo-produtos {
+        font-size: 30px;
+    }
+
+    main {
+        padding: 12px;
+    }
+
+    .produto {
+        width: 100%;
+        max-width: 340px;
+    }
+
+    .produto img {
+        height: 230px;
+    }
+
+    #chat-container {
+        right: 10px;
+        bottom: 80px;
+        max-width: calc(100% - 20px);
+    }
+
+    #btn-Abrir-Chat {
+        right: 10px;
+        bottom: 10px;
+        font-size: 14px;
+        padding: 12px 15px;
+    }
+
+    .chat-entrada {
+        gap: 5px;
+    }
+
+}

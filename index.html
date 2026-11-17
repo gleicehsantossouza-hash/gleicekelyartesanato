@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLEICE KELY Artesanato</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="topo">
+
+            <button type="button" id="btnCarrinho" aria-label="Abrir carrinho">
+                🛒
+                <span id="quantidadeCarrinho">0</span>
+            </button>
+
+            <p>
+                <button type="button" onclick="window.location.href='cadprodutos.html'">
+                    🔐 Acesso Administrativo
+                </button>
+            </p>
+
+            <p>
+                <button type="button" id="btnDark">
+                    🌙 Dark Mode
+                </button>
+            </p>
+        </div>
+
+        <div class="janela-carrinho" id="janelaCarrinho">
+
+            <div class="carrinho-cabecalho">
+                <h2>🛒 Meu Carrinho</h2>
+                <button type="button" id="fecharCarrinho">✖</button>
+            </div>
+
+            <div id="listaCarrinho">
+                <p class="carrinho-vazio">Seu carrinho está vazio.</p>
+            </div>
+
+            <div class="carrinho-total">
+                Total: <span id="total">R$ 0,00</span>
+            </div>
+
+            <button type="button" id="btnRetirar">
+                ➖ Retirar último item
+            </button>
+
+            <button type="button" id="btnFinalizarCompraCarrinho">
+                🛍️ Finalizar compra
+            </button>
+
+        </div>
+
+        <div class="titulo-loja">
+            <h1>GLEICE KELY ARTESANATOS</h1>
+            <p>Artesanato feito com amor! ❤️</p>
+        </div>
+    </header>
+
+    <main>
+        <h2 class="titulo-produtos">♡ Nossos Produtos ♡</h2>
+
+        <section class="vitrine" id="vitrine">
+
+            <div class="produto">
+                <img src="imagens/img1.jpg" alt="Peças em crochê">
+                <h3>Peças variadas em Crochê</h3>
+                <p>Feitas com linhas de boa qualidade.</p>
+                <p class="preco">R$ 30,00</p>
+                <button type="button" class="comprar" data-preco="30">
+                    🛒 Comprar
+                </button>
+            </div>
+
+            <div class="produto">
+                <img src="imagens/b1.jpg" alt="Bordados feitos à mão">
+                <h3>Bordados feitos à mão</h3>
+                <p>Produto delicado, feito com tecido de qualidade.</p>
+                <p class="preco">R$ 40,00</p>
+                <button type="button" class="comprar" data-preco="40">
+                    🛒 Comprar
+                </button>
+            </div>
+
+            <div class="produto">
+                <img src="imagens/b16.jpg" alt="Kits para presentear">
+                <h3>Belos Kits para presentear</h3>
+                <p>Uma lembrança artesanal perfeita para presentear.</p>
+                <p class="preco">R$ 60,00</p>
+                <button type="button" class="comprar" data-preco="60">
+                    🛒 Comprar
+                </button>
+            </div>
+
+        </section>
+    </main>
+
+    <button type="button" id="btn-Abrir-Chat" onclick="alternarChat()">
+        💬 Tem dúvidas? Chame nosso vendedor!
+    </button>
+
+    <div id="chat-container" style="display: none;">
+
+        <div class="chat-topo">
+            <span>🤖 Robô Assistente</span>
+            <button type="button" onclick="alternarChat()">X</button>
+        </div>
+
+        <div class="chat-mensagem">
+            <p>
+                Olá! Sou o Robô Assistente da
+                GLEICE KELY ARTESANATOS! 💚
+                <br><br>
+                Posso ajudar você com:
+                <br>
+                🧶 Informações sobre produtos.
+                <br>
+                💰 Preços e descontos.
+                <br>
+                🚚 Cálculo de frete.
+                <br>
+                🛍️ Finalização da compra.
+                <br><br>
+                Escolha a opção abaixo ou envie sua pergunta!
+            </p>
+        </div>
+
+        <div class="finalizar-chat">
+            <button
+                type="button"
+                id="btnFinalizarCompra"
+                onclick="
+                    document.getElementById('mensagem').value = 'finalizar pedido';
+                    document.getElementById('btnEnviar').click();
+                ">
+                🛒 Finalizar compra
+            </button>
+        </div>
+
+        <div class="chat-entrada">
+
+            <label for="imagemChat" class="botao-imagem" title="Enviar imagem">
+                🖼️
+            </label>
+
+            <input type="file" id="imagemChat" accept="image/*" hidden>
+
+            <input
+                type="text"
+                id="mensagem"
+                placeholder="Digite sua mensagem...">
+
+            <button type="button" id="btnEnviar">Enviar</button>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>♡ Todos os produtos feitos com carinho e dedicação. ♡</p>
+        <p>GLEICE KELY ARTESANATOS</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+
+    <script src="js/script.js"></script>
+
+    <!-- CONEXÃO COM O FIREBASE PARA CARREGAR OS PRODUTOS -->
+    <script type="module">
+
+        import { initializeApp } from
+            "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+
+        import {
+            getFirestore,
+            collection,
+            onSnapshot
+        } from
+            "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCg7n-ni-XpKqdU6mPoPQ-fPnk2jDh33sQ",
+            authDomain: "lojavirtualgkartesanato.firebaseapp.com",
+            projectId: "lojavirtualgkartesanato",
+            storageBucket: "lojavirtualgkartesanato.firebasestorage.app",
+            messagingSenderId: "608028677840",
+            appId: "1:608028677840:web:6f7d1abb179af8a80530d5",
+            measurementId: "G-QQMGXFVWH7"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        onSnapshot(
+            collection(db, "produtos"),
+
+            function(snapshot) {
+
+                const produtos = snapshot.docs.map(function(documento) {
+                    return {
+                        id: documento.id,
+                        ...documento.data()
+                    };
+                });
+
+                if (typeof window.carregarProdutosFirebase === "function") {
+                    window.carregarProdutosFirebase(produtos);
+                }
+
+            },
+
+            function(erro) {
+                console.error("Erro ao carregar produtos do Firebase:", erro);
+            }
+        );
+
+    </script>
+
+</body>
+</html>
