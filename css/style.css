@@ -17,28 +17,22 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-
-/* ==========================================
-   CABEÇALHO COM IMAGEM ARTESANAL
-========================================== */
+/* CABEÇALHO */
 
 header {
     position: relative;
     min-height: 340px;
     padding: 35px 20px;
     text-align: center;
-
     background-image:
         linear-gradient(
             rgba(180, 220, 245, 0.12),
             rgba(180, 220, 245, 0.12)
         ),
         url("../imagens/fundo-cabecalho-gk-artesanatos.jpg");
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,22 +63,17 @@ header p {
     margin: 8px 0 0;
 }
 
-
-/* ==========================================
-   ÍCONE DO CARRINHO E DARK MODE
-========================================== */
+/* CARRINHO E DARK MODE */
 
 .topo {
     position: absolute;
     top: 15px;
     right: 18px;
     z-index: 10;
-
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 12px;
-
     margin-top: 0;
 }
 
@@ -125,31 +114,22 @@ header p {
     white-space: nowrap;
 }
 
-
-/* ==========================================
-   JANELA DO CARRINHO
-========================================== */
+/* JANELA DO CARRINHO */
 
 .janela-carrinho {
     display: none;
     position: fixed;
     top: 85px;
     right: 20px;
-
     width: 340px;
     max-width: calc(100% - 30px);
     max-height: 75vh;
-
     overflow-y: auto;
-
     padding: 18px;
     border-radius: 18px;
-
     background: #ffffff;
     color: #333;
-
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
-
     z-index: 2000;
 }
 
@@ -161,7 +141,6 @@ header p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     border-bottom: 1px solid #eadced;
     padding-bottom: 10px;
     margin-bottom: 12px;
@@ -190,10 +169,8 @@ header p {
     justify-content: space-between;
     align-items: center;
     gap: 8px;
-
     padding: 10px 2px;
     border-bottom: 1px solid #eadced;
-
     font-size: 13px;
     font-weight: normal;
     text-align: left;
@@ -218,11 +195,9 @@ header p {
 .carrinho-total {
     margin-top: 12px;
     padding: 12px 0;
-
     font-size: 18px;
     font-weight: bold;
     color: #237b50;
-
     border-top: 1px solid #eadced;
 }
 
@@ -233,10 +208,7 @@ header p {
     font-size: 14px;
 }
 
-
-/* ==========================================
-   BOTÕES GERAIS
-========================================== */
+/* BOTÕES GERAIS */
 
 button {
     font-family: "Trebuchet MS", sans-serif;
@@ -262,10 +234,7 @@ button:disabled {
     transform: none;
 }
 
-
-/* ==========================================
-   PRODUTOS
-========================================== */
+/* PRODUTOS */
 
 main {
     padding: 20px;
@@ -334,10 +303,7 @@ main {
     padding: 13px;
 }
 
-
-/* ==========================================
-   RECONHECIMENTO DE IMAGENS
-========================================== */
+/* RECONHECIMENTO DE IMAGENS */
 
 #reconhecimento {
     background-color: white;
@@ -392,10 +358,7 @@ main {
     border-radius: 8px;
 }
 
-
-/* ==========================================
-   RODAPÉ
-========================================== */
+/* RODAPÉ */
 
 footer {
     background: linear-gradient(135deg, #24106d, #53118d);
@@ -411,10 +374,7 @@ footer p {
     font-size: 17px;
 }
 
-
-/* ==========================================
-   BOTÃO DO ROBÔ ASSISTENTE
-========================================== */
+/* BOTÃO DO ROBÔ ASSISTENTE */
 
 #btn-Abrir-Chat {
     font-family: "Trebuchet MS", sans-serif;
@@ -426,11 +386,9 @@ footer p {
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-
     position: fixed;
     bottom: 20px;
     right: 20px;
-
     z-index: 1000;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
@@ -439,30 +397,22 @@ footer p {
     background: #128C7E;
 }
 
-
-/* ==========================================
-   JANELA DO CHAT
-========================================== */
+/* JANELA DO CHAT */
 
 #chat-container {
     position: fixed;
     bottom: 85px;
     right: 20px;
-
     width: 320px;
     max-width: calc(100% - 40px);
     max-height: 440px;
-
     background-color: white;
     color: #222;
-
     border: 2px solid #20b9d0;
     border-radius: 16px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-
     flex-direction: column;
     overflow: hidden;
-
     z-index: 999;
 }
 
@@ -470,11 +420,9 @@ footer p {
     background: linear-gradient(135deg, #11b9d8, #008cae);
     color: white;
     padding: 15px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     font-weight: bold;
     font-size: 18px;
 }
@@ -488,10 +436,8 @@ footer p {
 .chat-mensagem {
     padding: 15px;
     line-height: 1.5;
-
     min-height: 100px;
     max-height: 230px;
-
     overflow-y: auto;
     overflow-wrap: break-word;
 }
@@ -544,10 +490,7 @@ footer p {
     font-weight: bold;
 }
 
-
-/* ==========================================
-   DARK MODE
-========================================== */
+/* DARK MODE */
 
 body.dark {
     background: #121212;
@@ -661,13 +604,9 @@ body.dark {
     color: #ccc;
 }
 
-
-/* ==========================================
-   RESPONSIVIDADE
-========================================== */
+/* RESPONSIVIDADE */
 
 @media (max-width: 850px) {
-
     header {
         min-height: 390px;
         padding-top: 125px;
@@ -698,9 +637,7 @@ body.dark {
     }
 }
 
-
 @media (max-width: 600px) {
-
     header {
         min-height: 420px;
         padding: 150px 12px 25px;
@@ -770,5 +707,130 @@ body.dark {
     .chat-entrada {
         gap: 5px;
     }
+}
 
+/* ==========================================
+   EASTER EGGS: MATRIX E STARWARS
+========================================== */
+
+/* MATRIX: FUNDO PRETO E LETRAS VERDE FLUORESCENTE */
+
+body.theme-matrix {
+    background: #000000 !important;
+    color: #39ff14 !important;
+}
+
+body.theme-matrix *,
+body.theme-matrix *::before,
+body.theme-matrix *::after {
+    color: #39ff14 !important;
+    border-color: #168a12 !important;
+}
+
+body.theme-matrix header,
+body.theme-matrix main,
+body.theme-matrix footer,
+body.theme-matrix .titulo-loja,
+body.theme-matrix .produto,
+body.theme-matrix #reconhecimento,
+body.theme-matrix #chat-container,
+body.theme-matrix .chat-topo,
+body.theme-matrix .chat-mensagem,
+body.theme-matrix .chat-mensagem p,
+body.theme-matrix .chat-entrada,
+body.theme-matrix .janela-carrinho,
+body.theme-matrix .carrinho-cabecalho,
+body.theme-matrix .item-carrinho,
+body.theme-matrix .carrinho-total,
+body.theme-matrix #label-container p {
+    background: #000000 !important;
+    background-image: none !important;
+    color: #39ff14 !important;
+    border-color: #168a12 !important;
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.18) !important;
+}
+
+body.theme-matrix button,
+body.theme-matrix input,
+body.theme-matrix textarea,
+body.theme-matrix select {
+    background: #050505 !important;
+    color: #39ff14 !important;
+    border: 1px solid #39ff14 !important;
+}
+
+body.theme-matrix button:hover {
+    background: #102010 !important;
+    box-shadow: 0 0 12px #39ff14 !important;
+}
+
+body.theme-matrix input::placeholder,
+body.theme-matrix textarea::placeholder {
+    color: #8cff80 !important;
+}
+
+body.theme-matrix .preco,
+body.theme-matrix .carrinho-total {
+    color: #39ff14 !important;
+}
+
+/* STARWARS: FUNDO PRETO E LETRAS VERMELHAS */
+
+body.theme-starwars {
+    background: #000000 !important;
+    color: #ff2020 !important;
+}
+
+body.theme-starwars *,
+body.theme-starwars *::before,
+body.theme-starwars *::after {
+    color: #ff2020 !important;
+    border-color: #a80000 !important;
+}
+
+body.theme-starwars header,
+body.theme-starwars main,
+body.theme-starwars footer,
+body.theme-starwars .titulo-loja,
+body.theme-starwars .produto,
+body.theme-starwars #reconhecimento,
+body.theme-starwars #chat-container,
+body.theme-starwars .chat-topo,
+body.theme-starwars .chat-mensagem,
+body.theme-starwars .chat-mensagem p,
+body.theme-starwars .chat-entrada,
+body.theme-starwars .janela-carrinho,
+body.theme-starwars .carrinho-cabecalho,
+body.theme-starwars .item-carrinho,
+body.theme-starwars .carrinho-total,
+body.theme-starwars #label-container p {
+    background: #000000 !important;
+    background-image: none !important;
+    color: #ff2020 !important;
+    border-color: #a80000 !important;
+    box-shadow: 0 0 10px rgba(255, 32, 32, 0.18) !important;
+}
+
+body.theme-starwars button,
+body.theme-starwars input,
+body.theme-starwars textarea,
+body.theme-starwars select {
+    background: #050505 !important;
+    color: #ff2020 !important;
+    border: 1px solid #ff2020 !important;
+}
+
+body.theme-starwars button:hover {
+    background: #260000 !important;
+    box-shadow: 0 0 12px #ff2020 !important;
+}
+
+body.theme-starwars input::placeholder,
+body.theme-starwars textarea::placeholder {
+    color: #ff8585 !important;
+}
+
+body.theme-starwars .preco,
+body.theme-starwars .carrinho-total {
+    color: #ff2020 !important;
 }
