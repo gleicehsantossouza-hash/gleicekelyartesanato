@@ -87,13 +87,6 @@
         .principal { background: #a85f83; color: white; width: 100%; }
         .secundario { background: #e7edf1; color: #554754; }
         .perigo { background: #c94d5c; color: white; }
-        .verde { background: #248b70; color: white; }
-
-        .alternar {
-            color: #a85f83;
-            background: transparent;
-            padding: 5px;
-        }
 
         .voltar-loja {
             display: inline-block;
@@ -183,7 +176,7 @@
 
     <header class="topo">
         <h1>GLEICE KELY ARTESANATOS</h1>
-        <p>Área do vendedor — Sua criatividade merece ser vista!</p>
+        <p>Área administrativa — Sua criatividade merece ser vista!</p>
 
         <a class="voltar-loja" href="index.html">
             🏠 Voltar para a loja
@@ -193,8 +186,8 @@
     <section class="painel" id="painelLogin">
 
         <div id="formLogin">
-            <h2>Bem-vindo à área do vendedor!</h2>
-            <p>Entre na sua conta para cadastrar e administrar seus produtos.</p>
+            <h2>Bem-vinda à sua área administrativa!</h2>
+            <p>Entre com seu e-mail e senha para administrar seus produtos.</p>
 
             <form id="loginForm">
                 <label for="loginEmail">E-mail</label>
@@ -205,31 +198,6 @@
 
                 <button class="principal" type="submit">Entrar na minha conta</button>
             </form>
-
-            <p>Ainda não tem uma conta?</p>
-            <button class="alternar" id="mostrarCadastro">Criar minha conta</button>
-        </div>
-
-        <div id="formCadastro" class="escondido">
-            <h2>Crie sua conta</h2>
-            <p>Faça seu cadastro para começar a anunciar seus produtos.</p>
-
-            <form id="cadastroForm">
-                <label for="cadastroNome">Seu nome</label>
-                <input type="text" id="cadastroNome" required placeholder="Digite seu nome">
-
-                <label for="cadastroEmail">E-mail</label>
-                <input type="email" id="cadastroEmail" required placeholder="Digite seu e-mail">
-
-                <label for="cadastroSenha">Crie uma senha</label>
-                <input type="password" id="cadastroSenha" required minlength="6"
-                    placeholder="Mínimo de 6 caracteres">
-
-                <button class="principal" type="submit">Criar minha conta</button>
-            </form>
-
-            <p>Já possui uma conta?</p>
-            <button class="alternar" id="mostrarLogin">Voltar para o login</button>
         </div>
 
         <div id="mensagemLogin" class="mensagem"></div>
@@ -238,7 +206,7 @@
     <section id="areaVendedor" class="escondido">
 
         <div class="painel">
-            <h2>Olá, <span id="nomeVendedor">vendedor(a)</span>! 💕</h2>
+            <h2>Olá, <span id="nomeVendedor">Gleice</span>! 💕</h2>
             <p>Agora você pode cadastrar seus produtos na loja.</p>
             <button class="secundario" id="sairConta">Sair da minha conta</button>
         </div>
@@ -325,11 +293,9 @@
 
     import {
         getAuth,
-        createUserWithEmailAndPassword,
         signInWithEmailAndPassword,
         signOut,
-        onAuthStateChanged,
-        updateProfile
+        onAuthStateChanged
     } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
 
     import {
@@ -346,7 +312,7 @@
     } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
     const firebaseConfig = {
-        apiKey: "AIzaSyCg7n-ni-XpKqdU6mPoPQ-fPnk2jDh33sQ",
+        apiKey: "AIzaSyCg7n-ni-XpKqdU6mPoPQ-fPnk2jDh33s",
         authDomain: "lojavirtualgkartesanato.firebaseapp.com",
         projectId: "lojavirtualgkartesanato",
         storageBucket: "lojavirtualgkartesanato.firebasestorage.app",
@@ -358,6 +324,9 @@
     const CLOUDINARY_CLOUD_NAME = "rgzlvkuj";
     const CLOUDINARY_UPLOAD_PRESET = "gk_artesanato_upload";
 
+    // UID da única administradora autorizada.
+    const ADMIN_UID = "N1T0JIYAulbNPn7hIxqUPX5OtwP2";
+
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
@@ -368,8 +337,6 @@
 
     const painelLogin = document.getElementById("painelLogin");
     const areaVendedor = document.getElementById("areaVendedor");
-    const formLogin = document.getElementById("formLogin");
-    const formCadastro = document.getElementById("formCadastro");
     const mensagemLogin = document.getElementById("mensagemLogin");
     const mensagemProduto = document.getElementById("mensagemProduto");
     const mensagemUpload = document.getElementById("mensagemUpload");
@@ -393,11 +360,9 @@
         const codigo = erro.code || "";
 
         const erros = {
-            "auth/email-already-in-use": "Este e-mail já está cadastrado.",
             "auth/invalid-email": "Digite um e-mail válido.",
-            "auth/weak-password": "A senha precisa ter pelo menos 6 caracteres.",
             "auth/invalid-credential": "E-mail ou senha incorretos.",
-            "auth/user-not-found": "Não encontramos uma conta com esse e-mail.",
+            "auth/user-not-found": "Não encontramos sua conta.",
             "auth/wrong-password": "Senha incorreta.",
             "auth/too-many-requests": "Muitas tentativas. Aguarde um pouco e tente novamente.",
             "permission-denied": "O Firebase não permitiu esta operação. Confira as regras do banco de dados.",
@@ -477,38 +442,6 @@
         return resultado.secure_url;
     }
 
-    document.getElementById("mostrarCadastro").addEventListener("click", () => {
-        formLogin.classList.add("escondido");
-        formCadastro.classList.remove("escondido");
-        limparMensagem(mensagemLogin);
-    });
-
-    document.getElementById("mostrarLogin").addEventListener("click", () => {
-        formCadastro.classList.add("escondido");
-        formLogin.classList.remove("escondido");
-        limparMensagem(mensagemLogin);
-    });
-
-    document.getElementById("cadastroForm").addEventListener("submit", async (evento) => {
-        evento.preventDefault();
-
-        const nome = document.getElementById("cadastroNome").value.trim();
-        const email = document.getElementById("cadastroEmail").value.trim();
-        const senha = document.getElementById("cadastroSenha").value;
-
-        try {
-            const resultado = await createUserWithEmailAndPassword(auth, email, senha);
-
-            await updateProfile(resultado.user, { displayName: nome });
-
-            mostrarMensagem(mensagemLogin, "Conta criada com sucesso! Bem-vindo(a)!", "sucesso");
-            evento.target.reset();
-
-        } catch (erro) {
-            mostrarMensagem(mensagemLogin, traduzirErro(erro), "erro");
-        }
-    });
-
     document.getElementById("loginForm").addEventListener("submit", async (evento) => {
         evento.preventDefault();
 
@@ -527,7 +460,7 @@
     onAuthStateChanged(auth, async (usuario) => {
         usuarioAtual = usuario;
 
-        if (usuario) {
+        if (usuario && usuario.uid === ADMIN_UID) {
             painelLogin.classList.add("escondido");
             areaVendedor.classList.remove("escondido");
 
@@ -537,9 +470,19 @@
             await carregarProdutos();
 
         } else {
-            painelLogin.classList.remove("escondido");
             areaVendedor.classList.add("escondido");
+            painelLogin.classList.remove("escondido");
             listaProdutos.textContent = "";
+
+            if (usuario) {
+                mostrarMensagem(
+                    mensagemLogin,
+                    "Esta conta não tem autorização para acessar a área administrativa.",
+                    "erro"
+                );
+
+                await signOut(auth);
+            }
         }
     });
 
@@ -550,8 +493,8 @@
     document.getElementById("produtoForm").addEventListener("submit", async (evento) => {
         evento.preventDefault();
 
-        if (!usuarioAtual) {
-            mostrarMensagem(mensagemProduto, "Entre na sua conta primeiro.", "erro");
+        if (!usuarioAtual || usuarioAtual.uid !== ADMIN_UID) {
+            mostrarMensagem(mensagemProduto, "Você não tem autorização para esta operação.", "erro");
             return;
         }
 
@@ -777,6 +720,11 @@
     document.getElementById("cancelarEdicao").addEventListener("click", cancelarEdicao);
 
     async function excluirProduto(id) {
+        if (!usuarioAtual || usuarioAtual.uid !== ADMIN_UID) {
+            mostrarMensagem(mensagemProduto, "Você não tem autorização para esta operação.", "erro");
+            return;
+        }
+
         const confirmar = confirm("Tem certeza de que deseja excluir este produto?");
 
         if (!confirmar) return;
