@@ -48,7 +48,7 @@
             margin: 15px 0 7px;
         }
 
-        input, textarea, select {
+        input, textarea {
             width: 100%;
             padding: 13px;
             border: 1px solid #e3cbd8;
@@ -59,7 +59,7 @@
             background: white;
         }
 
-        input:focus, textarea:focus, select:focus {
+        input:focus, textarea:focus {
             border-color: #a85f83;
         }
 
@@ -136,17 +136,6 @@
         .produto-info h3 { margin: 0 0 7px; color: #a85f83; }
         .produto-info p { margin: 5px 0; overflow-wrap: anywhere; }
 
-        .categoria-etiqueta {
-            display: inline-block;
-            background: #fce8f0;
-            color: #a85f83;
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-
         .acoes { display: flex; gap: 8px; flex-wrap: wrap; }
         .acoes button { margin-top: 8px; }
 
@@ -217,27 +206,15 @@
             <form id="produtoForm">
 
                 <label for="produtoNome">Nome do produto</label>
-                <input type="text" id="produtoNome" required placeholder="Ex.: Bolsa de crochê">
+                <input type="text" id="produtoNome" required placeholder="Ex.: Bolsa artesanal">
 
                 <label for="produtoDescricao">Descrição</label>
                 <textarea id="produtoDescricao" required
-                    placeholder="Conte um pouco sobre seu produto"></textarea>
+                    placeholder="Conte um pouco sobre seu produto, material utilizado e como foi feito."></textarea>
 
                 <label for="produtoPreco">Preço (R$)</label>
                 <input type="number" id="produtoPreco" required min="0.01" step="0.01"
                     placeholder="Ex.: 35,00">
-
-                <label for="produtoCategoria">Categoria do produto</label>
-                <select id="produtoCategoria" required>
-                    <option value="">Escolha uma categoria</option>
-                    <option value="croche">Crochê</option>
-                    <option value="bordado">Bordado</option>
-                    <option value="papelaria">Papelaria</option>
-                </select>
-
-                <p style="font-size:13px;color:#806b79">
-                    Escolha a categoria correta para seu produto aparecer na seção correspondente da loja.
-                </p>
 
                 <label for="produtoImagem">Escolha a foto do seu computador</label>
                 <input type="file" id="produtoImagem" accept="image/*">
@@ -312,7 +289,7 @@
     } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
     const firebaseConfig = {
-        apiKey: "AIzaSyCg7n-ni-XpKqdU6mPoPQ-fPnk2jDh33s",
+        apiKey: "AIzaSyCg7n-ni-XpKqdU6mPoPQ-fPnk2jDh33sQ",
         authDomain: "lojavirtualgkartesanato.firebaseapp.com",
         projectId: "lojavirtualgkartesanato",
         storageBucket: "lojavirtualgkartesanato.firebasestorage.app",
@@ -370,16 +347,6 @@
         };
 
         return erros[codigo] || "Ocorreu um erro: " + (erro.message || "tente novamente.");
-    }
-
-    function nomeCategoria(categoria) {
-        const categorias = {
-            croche: "Crochê",
-            bordado: "Bordado",
-            papelaria: "Papelaria"
-        };
-
-        return categorias[categoria] || "Sem categoria";
     }
 
     campoImagem.addEventListener("change", () => {
@@ -501,10 +468,9 @@
         const nome = document.getElementById("produtoNome").value.trim();
         const descricao = document.getElementById("produtoDescricao").value.trim();
         const preco = Number(document.getElementById("produtoPreco").value);
-        const categoria = document.getElementById("produtoCategoria").value;
         const arquivo = campoImagem.files[0];
 
-        if (!nome || !descricao || !categoria ||
+        if (!nome || !descricao ||
             !Number.isFinite(preco) || preco <= 0) {
             mostrarMensagem(mensagemProduto, "Preencha os campos corretamente.", "erro");
             return;
@@ -539,7 +505,6 @@
                 nome,
                 descricao,
                 preco,
-                categoria,
                 imagem,
                 usuarioId: usuarioAtual.uid,
                 vendedor: usuarioAtual.displayName || usuarioAtual.email
@@ -640,11 +605,7 @@
                     currency: "BRL"
                 });
 
-                const etiqueta = document.createElement("span");
-                etiqueta.className = "categoria-etiqueta";
-                etiqueta.textContent = nomeCategoria(produto.categoria);
-
-                informacoes.append(titulo, descricao, preco, etiqueta);
+                informacoes.append(titulo, descricao, preco);
 
                 const acoes = document.createElement("div");
                 acoes.className = "acoes";
@@ -676,7 +637,6 @@
         document.getElementById("produtoNome").value = produto.nome || "";
         document.getElementById("produtoDescricao").value = produto.descricao || "";
         document.getElementById("produtoPreco").value = produto.preco || "";
-        document.getElementById("produtoCategoria").value = produto.categoria || "";
 
         campoImagem.value = "";
 
